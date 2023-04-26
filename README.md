@@ -6,9 +6,10 @@
 4. Run **java -jar target/autentica-practical-0.0.1-SNAPSHOT.jar** from the root of the project to run it
 
 #### Angular project
-1. Move to root of the project (autentica-practical-frontend)
-2. Open the terminal
-3. Run: **ng serve --open**
+1. Open the terminal
+2. Move to root of the project (autentica-practical-frontend)
+3. Run **npm install** to install all packages
+4. Run: **ng serve --open**
 
 ### Mārcis Andersons
 - Github nr1: https://github.com/NamedUnknown
