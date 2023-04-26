@@ -11,6 +11,9 @@
 3. Run **npm install** to install all packages
 4. Run: **ng serve --open**
 
+
+### The project overall took me 15-18 h.
+
 ### Mārcis Andersons
 - Github nr1: https://github.com/NamedUnknown
 - Github Nr2: https://github.com/Marchel0925
