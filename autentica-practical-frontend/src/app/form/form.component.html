@@ -1,0 +1,172 @@
+<div>
+  <h3>Apply</h3>
+  <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="form-label" for="description">Description:</label>
+      <textarea
+        type="text"
+        class="form-control"
+        id="description"
+        formControlName="description"
+        aria-describedby="help"
+        maxlength="300"
+      ></textarea>
+      <div id="help" class="form-text">Why do you need this? No more than 300 characters.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="email">Email:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        placeholder="something@mail.com"
+      />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="controls.email?.invalid && (controls.email?.touched || controls.email?.dirty)"
+      >
+        <div *ngIf="controls.email?.errors?.['required']">
+          Email can't be empty.
+        </div>
+        <div *ngIf="controls.email?.errors?.['email']">
+          Input a valid email.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="neededTill">Needed till:</label>
+      <input
+        type="datetime-local"
+        class="form-control"
+        id="neededTill"
+        formControlName="neededTill"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="controls.neededTill?.invalid && (controls.neededTill?.touched || controls.neededTill?.dirty)"
+      >
+        <div *ngIf="controls.neededTill?.errors?.['required']">
+          Input a valid date.
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-2" formGroupName="technology">
+      <div class="form-group">
+        <label class="form-label" for="techType">Type:</label>
+        <select class="form-select" id="techType" formControlName="type" (change)="onTypeChange($event)">
+          <option
+            *ngFor="let type of technologyTypes"
+            [value]="type"
+            [selected]="controls.technology.value.type == type"
+          >{{type}}</option>
+        </select>
+
+        <div
+          class="alert alert-danger"
+          *ngIf="techControls.type?.invalid && (techControls.type?.touched || techControls.type?.dirty)"
+        >
+          <div *ngIf="techControls.type?.errors?.['required']">
+            Type is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="techRAM">RAM (GB):</label>
+        <select class="form-select" formControlName="ram" id="techRAM">
+          <option
+            *ngFor="let r of technologyRAM"
+            [value]="r"
+            [selected]="controls.technology.value.ram == r"
+          >{{r}}</option>
+        </select>
+
+        <div
+          class="alert alert-danger"
+          *ngIf="techControls.ram?.invalid && (techControls.ram?.touched || techControls.ram?.dirty)"
+        >
+          <div *ngIf="techControls.ram?.errors?.['required']">
+            RAM is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="techCores">Cores:</label>
+        <select class="form-select" formControlName="cores" id="techCores">
+          <option
+            *ngFor="let c of technologyCores"
+            [value]="c"
+            [selected]="controls.technology.value.cores == c"
+          >{{c}}</option>
+        </select>
+
+        <div
+          class="alert alert-danger"
+          *ngIf="techControls.cores?.invalid && (techControls.cores?.touched || techControls.cores?.dirty)"
+        >
+          <div *ngIf="techControls.cores?.errors?.['required']">
+            Cores is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="techMotherboard">Motherboard:</label>
+        <select class="form-select" formControlName="motherboard" id="techMotherboard">
+          <option
+            *ngFor="let mb of motherboards"
+            [value]="mb"
+            [selected]="controls.technology.value.motherboard == mb"
+          >{{mb}}</option>
+        </select>
+
+        <div
+          class="alert alert-danger"
+          *ngIf="techControls.motherboard?.invalid && (techControls.motherboard?.touched || techControls.motherboard?.dirty)"
+        >
+          <div *ngIf="techControls.motherboard?.errors?.['required']">
+            Motherboard is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="techGPU">GPU:</label>
+        <select class="form-select" formControlName="gpu" id="techGPU">
+          <option
+            *ngFor="let gpu of gpus"
+            [value]="gpu"
+            [selected]="controls.technology.value.gpu == gpu"
+          >{{gpu}}</option>
+        </select>
+
+        <div
+          class="alert alert-danger"
+          *ngIf="techControls.gpu?.invalid && (techControls.gpu?.touched || techControls.gpu?.dirty)"
+        >
+          <div *ngIf="techControls.gpu?.errors?.['required']">
+            GPU is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-around">
+      <button
+        type="submit"
+        class="btn btn-primary my-4"
+        [disabled]="!applicationForm.valid"
+      >Submit</button>
+      <button
+        class="btn btn-outline-danger my-4"
+        (click)="emitEvent(null)"
+      >Cancel</button>
+    </div>
+  </form>
+</div>

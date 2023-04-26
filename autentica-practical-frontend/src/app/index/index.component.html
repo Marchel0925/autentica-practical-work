@@ -1,0 +1,20 @@
+<div class="w-fill h-full p-3">
+  <div class="d-flex justify-content-between">
+    <h1>{{title}}</h1>
+    <i class="bi bi-plus-square-fill fa-5x my-auto" *ngIf="!showForm" (click)="toggleForm()"></i>
+  </div>
+  <div class="d-flex">
+    <app-table
+      *ngIf="!loading"
+      class="w-100"
+      [applications]="applications"
+      [showForm]="showForm"
+      (actionEmitter)="handleActionEvent($event)"
+    ></app-table>
+    <app-form
+      class="w-75 ms-3"
+      *ngIf="showForm"
+      (eventEmitter)="handleFormEvent($event)"
+    ></app-form>
+  </div>
+</div>

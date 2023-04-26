@@ -1,0 +1,47 @@
+<div class="my-3">
+  <div *ngIf="applications.length == 0" class="alert alert-danger text-center" role="alert">
+    <h4>No applications found.</h4>
+  </div>
+  <table *ngIf="applications.length > 0" class="table table-responsive table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Description</th>
+        <th scope="col">Email</th>
+        <th scope="col">Created</th>
+        <th scope="col">Needed till</th>
+        <th scope="col">Technology</th>
+        <th scope="col">Status</th>
+        <th scope="col" *ngIf="!showForm">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of applications">
+        <th scope="row">{{a.id}}</th>
+        <td>{{getDescription(a?.description)}}</td>
+        <td>{{a.email}}</td>
+        <td>{{toDate(a.created) | date: 'dd.MM.yyyy HH:mm'}}</td>
+        <td>{{toDate(a.neededTill) | date: 'dd.MM.yyyy HH:mm'}}</td>
+        <td>
+          <div class="d-flex my-auto px-2">
+            <ngx-json-viewer [json]="a.technology?.toDTO()"></ngx-json-viewer>
+          </div>
+        </td>
+        <td>{{a.status}}</td>
+        <td class="d-flex" *ngIf="!showForm">
+          <i 
+            *ngIf="a.status != 'ACCEPTED' && a.status != 'REJECTED'"
+            class="btn btn-success bi bi-check2 mx-2"
+            (click)="emitEvent('accept', a)">
+          </i>
+          <i 
+            *ngIf="a.status != 'ACCEPTED' && a.status != 'REJECTED'"
+            class="btn btn-danger bi bi-x-lg mx-2"
+            (click)="emitEvent('reject', a)">
+          </i>
+          <i class="btn btn-outline-danger bi bi-trash3-fill mx-2" (click)="emitEvent('delete', a)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
